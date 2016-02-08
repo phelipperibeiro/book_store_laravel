@@ -60,7 +60,19 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'web'], fun
     Route::post('/users/roles/{id}/store',['as'=>'users.roles.store' , 'uses' => 'Admin\UsersController@storeRole']);
     Route::get('/users/roles/{id}/revoke/{role_id}',['as'=>'users.roles.revoke' , 'uses' => 'Admin\UsersController@revokeRole']);
 
-    ##Route::get('/home', 'HomeController@index');
+    /*
+    |--------------------------------------------------------------------------
+    | Rotas de Categories
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/categories',['as'=>'categories.index' , 'uses' => 'Admin\CategoriesController@index']);
+    Route::get('/categories/new',['as'=>'categories.create' , 'uses' => 'Admin\CategoriesController@create']);
+    Route::post('/categories/new',['as'=>'categories.store' , 'uses' => 'Admin\CategoriesController@store']);
+    Route::get('/categories/edit/{id}',['as'=>'categories.edit' , 'uses' => 'Admin\CategoriesController@edit']);
+    Route::put('/categories/update/{id}',['as'=>'categories.update' , 'uses' => 'Admin\CategoriesController@update']);
+    Route::get('/categories/destroy/{id}',['as'=>'categories.destroy' , 'uses' => 'Admin\CategoriesController@destroy']);
+
+#   #Route::get('/home', 'HomeController@index');
 });
 
 
