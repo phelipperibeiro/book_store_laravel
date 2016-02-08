@@ -26,11 +26,12 @@ class User extends Authenticatable
     ];
 
     /* method responsavel pelo relacionamento de tabelas */
+
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
-    
+
     public function addRole($role)
     {
         if (is_string($role)) {
@@ -42,6 +43,17 @@ class User extends Authenticatable
         return $this->roles()->save(
             Role::whereName($role->name)->firstOrFail()
         );
+    }
+
+    public function revokeRole($role)
+    {
+        if (is_string($role)) {
+            return $this->roles()->detach(
+                Role::whereName($role)->firstOrFail()
+            );
+        }
+
+        return $this->roles()->detach($role);
     }
 
 }

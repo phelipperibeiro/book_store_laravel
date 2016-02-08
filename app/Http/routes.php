@@ -18,7 +18,11 @@ Route::get('/', function () {
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'web'], function () {
     Route::auth();
     
-    // Rotas de ROLES
+    /*
+    |--------------------------------------------------------------------------
+    | Rotas de Roles
+    |--------------------------------------------------------------------------
+    */
     Route::get('/roles',['as'=>'roles.index' , 'uses' => 'Admin\RolesController@index']);
     Route::get('/roles/new',['as'=>'roles.create' , 'uses' => 'Admin\RolesController@create']);
     Route::post('/roles/new',['as'=>'roles.store' , 'uses' => 'Admin\RolesController@store']);
@@ -29,13 +33,32 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'web'], fun
     Route::post('/roles/permissions/{id}/store', ['as'=>'roles.permissions.store', 'uses'=>'Admin\RolesController@storePermission']);
     Route::get('/roles/permissions/{id}/revoke/{permission_id}', ['as'=>'roles.permissions.revoke', 'uses'=>'Admin\RolesController@revokePermission']);
     
-    //Rotas de PERMISSIONS
+    /*
+    |--------------------------------------------------------------------------
+    | Rotas de Permissions
+    |--------------------------------------------------------------------------
+    */
     Route::get('/permissions',['as'=>'permissions.index' , 'uses' => 'Admin\PermissionsController@index']);
     Route::get('/permissions/new',['as'=>'permissions.create' , 'uses' => 'Admin\PermissionsController@create']);
     Route::post('/permissions/new',['as'=>'permissions.store' , 'uses' => 'Admin\PermissionsController@store']);
     Route::get('/permissions/edit/{id}',['as'=>'permissions.edit' , 'uses' => 'Admin\PermissionsController@edit']);
     Route::put('/permissions/update/{id}',['as'=>'permissions.update' , 'uses' => 'Admin\PermissionsController@update']);
     Route::get('/permissions/destroy/{id}',['as'=>'permissions.destroy' , 'uses' => 'Admin\PermissionsController@destroy']);
+    
+    /*
+    |--------------------------------------------------------------------------
+    | Rotas de Users
+    |--------------------------------------------------------------------------
+    */
+    Route::get('/users',['as'=>'users.index' , 'uses' => 'Admin\UsersController@index']);
+    Route::get('/users/new',['as'=>'users.create' , 'uses' => 'Admin\UsersController@create']);
+    Route::post('/users/new',['as'=>'users.store' , 'uses' => 'Admin\UsersController@store']);
+    Route::get('/users/edit/{id}',['as'=>'users.edit' , 'uses' => 'Admin\UsersController@edit']);
+    Route::put('/users/update/{id}',['as'=>'users.update' , 'uses' => 'Admin\UsersController@update']);
+    Route::get('/users/destroy/{id}',['as'=>'users.destroy' , 'uses' => 'Admin\UsersController@destroy']);
+    Route::get('/users/roles/{id}',['as'=>'users.roles' , 'uses' => 'Admin\UsersController@roles']);
+    Route::post('/users/roles/{id}/store',['as'=>'users.roles.store' , 'uses' => 'Admin\UsersController@storeRole']);
+    Route::get('/users/roles/{id}/revoke/{role_id}',['as'=>'users.roles.revoke' , 'uses' => 'Admin\UsersController@revokeRole']);
 
     ##Route::get('/home', 'HomeController@index');
 });
