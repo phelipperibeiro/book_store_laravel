@@ -13,17 +13,21 @@ class RolesController extends Controller
 
     public function index()
     {
+        //$this->authorize('user_view_roles');
+        
         $roles = Role::all();
         return view('admin.roles.index', compact('roles'));
     }
 
     public function create()
-    {
+    {   
+        $this->authorize('user_add_role');
         return view('admin.roles.create');
     }
 
     public function store(Request $request)
     {
+        $this->authorize('user_add_role');
         Role::create($request->all());
         return redirect()->route('admin.roles.index');
     }

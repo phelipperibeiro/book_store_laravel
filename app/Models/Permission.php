@@ -14,9 +14,9 @@ class Permission extends Model
 
     /* method responsavel pelo relacionamento de tabelas */
 
-    public function roles($param)
+    public function roles()
     {
-        $this->belongsToMany(Roles::class);
+        return $this->belongsToMany(Role::class);
     }
 
 }

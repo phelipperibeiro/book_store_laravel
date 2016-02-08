@@ -17,7 +17,6 @@ Route::get('/', function () {
 
 Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'web'], function () {
     Route::auth();
-    
     /*
     |--------------------------------------------------------------------------
     | Rotas de Roles
