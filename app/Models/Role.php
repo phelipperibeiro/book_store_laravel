@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
 
-    protected $fillable = [
+    protected $fillable= [
         'name',
         'description'
     ];
@@ -17,22 +17,13 @@ class Role extends Model
         return $this->belongsToMany(Permission::class);
     }
 
-    public function addPermission($permission)
+    public function addPermission(Permission $permission)
     {
-        if (is_string($permission)) {
-            return $this->permissions()->save(
-                            Permission::whereName($permission)->firstOrFail()
-            );
-        }
-
         return $this->permissions()->save($permission);
     }
-
-    /* exclui o relacionamento das tabelas */
 
     public function revokePermission(Permission $permission)
     {
         return $this->permissions()->detach($permission);
     }
-
 }

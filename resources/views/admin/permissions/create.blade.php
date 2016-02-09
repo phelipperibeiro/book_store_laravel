@@ -9,7 +9,7 @@
 
         @include('admin.permissions._form')
 
-        {!! Form::submit('Add role', ['class'=>'btn btn-primary']) !!}
+        {!! Form::submit('Add permission', ['class'=>'btn btn-primary']) !!}
 
         {!! Form::close() !!}
 

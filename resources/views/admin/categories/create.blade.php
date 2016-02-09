@@ -3,13 +3,13 @@
 @section('content')
 
     <div class="container">
-        <h2>Create new Permission</h2>
+        <h2>Create new Category</h2>
 
-        {!! Form::open(['route'=>'admin.permissions.store']) !!}
+        {!! Form::open(['route'=>'admin.categories.store']) !!}
 
-        @include('admin.permissions._form')
+        @include('admin.categories._form')
 
-        {!! Form::submit('Add role', ['class'=>'btn btn-primary']) !!}
+        {!! Form::submit('Add category', ['class'=>'btn btn-primary']) !!}
 
         {!! Form::close() !!}
 

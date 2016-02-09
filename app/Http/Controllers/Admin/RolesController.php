@@ -5,29 +5,31 @@ namespace App\Http\Controllers\Admin;
 use App\Models\Permission;
 use App\Models\Role;
 use Illuminate\Http\Request;
+
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 class RolesController extends Controller
 {
 
+    public function __construct()
+    {
+        $this->authorize('role_admin');
+    }
+
     public function index()
     {
-        //$this->authorize('user_view_roles');
-        
         $roles = Role::all();
         return view('admin.roles.index', compact('roles'));
     }
 
     public function create()
-    {   
-        $this->authorize('user_add_role');
+    {
         return view('admin.roles.create');
     }
 
     public function store(Request $request)
     {
-        $this->authorize('user_add_role');
         Role::create($request->all());
         return redirect()->route('admin.roles.index');
     }
@@ -54,24 +56,27 @@ class RolesController extends Controller
     {
         $role = Role::find($id);
         $permissions = Permission::all();
+
         return view('admin.roles.permissions', compact('role', 'permissions'));
     }
+
     public function storePermission(Request $request, $id)
     {
-       $role = Role::find($id);
-       $permission = Permission::findOrFail($request->all()['permission_id']);
-       $role->addPermission($permission);
-       
-       return redirect()->back();
-    }
-    
-    public function revokePermission($id,$permission_id)
-    {
-       $role = Role::find($id);
-       $permission = Permission::find($permission_id);
-       $role->revokePermission($permission);
-       
-       return redirect()->back();
+        $role = Role::find($id);
+
+        $permission = Permission::findOrFail($request->all()['permission_id']);
+        $role->addPermission($permission);
+
+        return redirect()->back();
     }
 
+    public function revokePermission($id, $permission_id)
+    {
+        $role = Role::find($id);
+        $permission = Permission::find($permission_id);
+        $role->revokePermission($permission);
+
+        return redirect()->back();
+
+    }
 }

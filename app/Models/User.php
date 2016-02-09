@@ -25,31 +25,37 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
 
-    /* method responsavel pelo relacionamento de tabelas */
-
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
 
+    public function books()
+    {
+        return $this->hasMany(Book::class);
+    }
+
+    //$user->addRole('Admin')
+    //$user->addRole($role);
     public function addRole($role)
     {
         if (is_string($role)) {
             return $this->roles()->save(
-                            Role::whereName($role)->firstOrFail()
+                Role::whereName($role)->firstOrFail()
             );
         }
 
         return $this->roles()->save(
-                        Role::whereName($role->name)->firstOrFail()
+            Role::whereName($role->name)->firstOrFail()
         );
+
     }
 
     public function revokeRole($role)
     {
         if (is_string($role)) {
             return $this->roles()->detach(
-                            Role::whereName($role)->firstOrFail()
+                Role::whereName($role)->firstOrFail()
             );
         }
 
@@ -61,14 +67,16 @@ class User extends Authenticatable
         if (is_string($role)) {
             return $this->roles->contains('name', $role);
         }
-        if (is_array($role)) {
-            foreach ($role as $r) {
-                if ($this->roles->contains('name', $r)) {
+
+        if(is_array($role)) {
+            foreach($role as $r) {
+                if($this->roles->contains('name', $r)) {
                     return true;
                 }
             }
             return false;
         }
+
         return $role->intersect($this->roles)->count();
     }
 
@@ -76,5 +84,4 @@ class User extends Authenticatable
     {
         return $this->hasRole('Admin');
     }
-
 }

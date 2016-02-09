@@ -6,17 +6,13 @@ use Illuminate\Database\Eloquent\Model;
 
 class Permission extends Model
 {
-
-    protected $fillable = [
+    protected $fillable= [
         'name',
-        'description',
+        'description'
     ];
-
-    /* method responsavel pelo relacionamento de tabelas */
 
     public function roles()
     {
         return $this->belongsToMany(Role::class);
     }
-
 }

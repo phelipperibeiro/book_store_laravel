@@ -5,7 +5,6 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateRolesTable extends Migration
 {
-
     /**
      * Run the migrations.
      *
@@ -19,29 +18,27 @@ class CreateRolesTable extends Migration
             $table->string('description')->nullable();
             $table->timestamps();
         });
-        
-        /*relacionando com a tabela permission e roles*/
+
         Schema::create('permission_role', function (Blueprint $table) {
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
-            
+
             $table->foreign('permission_id')->references('id')->on('permissions')->onDelete('cascade');
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
-            
+
             $table->primary(['permission_id','role_id']);
         });
-       
-        /*relacionando com a tabela roles e users*/
+
         Schema::create('role_user', function (Blueprint $table) {
             $table->integer('role_id')->unsigned();
             $table->integer('user_id')->unsigned();
-           
+
             $table->foreign('role_id')->references('id')->on('roles')->onDelete('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            
+
+
             $table->primary(['role_id','user_id']);
         });
-
     }
 
     /**
@@ -55,5 +52,4 @@ class CreateRolesTable extends Migration
         Schema::drop('permission_role');
         Schema::drop('roles');
     }
-
 }
