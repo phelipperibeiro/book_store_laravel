@@ -11,15 +11,15 @@ class CategoriesTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\CodePub\Models\Category::class)->create([
+        factory(\App\Models\Category::class)->create([
            'name'=>'Art'
         ]);
 
-        factory(\CodePub\Models\Category::class)->create([
+        factory(\App\Models\Category::class)->create([
             'name'=>'Tech'
         ]);
 
-        factory(\CodePub\Models\Category::class)->create([
+        factory(\App\Models\Category::class)->create([
             'name'=>'Business'
         ]);
     }
