@@ -89,6 +89,8 @@ Route::group(['prefix' => 'admin', 'as' => 'admin.', 'middleware' => 'web'], fun
     Route::get('books/edit/{id}', ['as' => 'books.edit', 'uses' => 'Admin\BooksController@edit']);
     Route::put('books/update/{id}', ['as' => 'books.update', 'uses' => 'Admin\BooksController@update']);
     Route::get('books/destroy/{id}', ['as' => 'books.destroy', 'uses' => 'Admin\BooksController@destroy']);
+    Route::get('books/cover/{id}', ['as' => 'books.cover', 'uses' => 'Admin\BooksController@cover']);
+    Route::post('books/cover/{id}', ['as' => 'books.cover.store', 'uses' => 'Admin\BooksController@coverStore']);
     #Route::get('/home', 'HomeController@index');
 });
 

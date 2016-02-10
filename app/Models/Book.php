@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
+use App\Models\BookInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class Book extends Model
+class Book extends Model implements BookInterface
 {
     protected $fillable = [
         'user_id',
